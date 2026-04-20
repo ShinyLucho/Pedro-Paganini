@@ -203,6 +203,9 @@ nav {
 /* ---------- ŒUVRES ---------- */
 .oeuvres {
   padding: 140px 48px;
+  background: var(--bg-2);
+  border-top: 0.5px solid var(--line);
+  border-bottom: 0.5px solid var(--line);
 }
 
 .oeuvres-grid {
@@ -288,8 +291,6 @@ nav {
 /* ---------- ATELIER ---------- */
 .atelier {
   padding: 140px 48px;
-  background: var(--bg-2);
-  border-top: 0.5px solid var(--line);
 }
 
 .atelier-inner {
@@ -349,7 +350,6 @@ nav {
 .signature-section {
   padding: 140px 32px;
   text-align: center;
-  border-top: 0.5px solid var(--line);
   background: var(--bg);
 }
 
