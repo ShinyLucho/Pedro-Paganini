@@ -1,0 +1,569 @@
+/* =========================================================
+   PEDRO PAGANINI — Feuille de style commune
+   Atelier, Montagne Noire
+   ========================================================= */
+
+:root {
+  --bg: #0e0d0b;
+  --bg-2: #14120f;
+  --bg-3: #1c1a16;
+  --text: #e8ddc6;
+  --text-2: #c2b89f;
+  --text-3: #8a8169;
+  --text-4: #5e5644;
+  --line: #2a2722;
+  --accent: #a87d4f;
+  --wax: #5a1715;
+  --display: "Cormorant Garamond", serif;
+  --body: "EB Garamond", "Cormorant Garamond", serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--body);
+  font-weight: 400;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Subtle grain overlay for atmosphere */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- NAV (commun) ---------- */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 48px;
+  background: rgba(14, 13, 11, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 0.5px solid var(--line);
+  transition: padding 0.4s ease;
+}
+
+.monogram {
+  font-family: var(--display);
+  font-size: 24px;
+  color: var(--text-2);
+  font-weight: 400;
+  line-height: 1;
+  text-decoration: none;
+  transition: color 0.4s ease;
+}
+
+.monogram:hover {
+  color: var(--text);
+}
+
+.menu {
+  display: flex;
+  gap: 34px;
+}
+
+.menu a {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--text-3);
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  transition: color 0.4s ease;
+}
+
+.menu a:hover { color: var(--text); }
+
+.menu a.current { color: var(--text-2); }
+
+/* ---------- Headings & eyebrows (commun) ---------- */
+.section-header {
+  text-align: center;
+  margin-bottom: 90px;
+}
+
+.section-eyebrow {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 12px;
+  letter-spacing: 4px;
+  color: var(--text-3);
+  display: block;
+  margin-bottom: 18px;
+}
+
+.section-title {
+  font-family: var(--display);
+  font-weight: 300;
+  font-size: 38px;
+  letter-spacing: 4px;
+  color: var(--text);
+}
+
+/* ---------- HERO (index) ---------- */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 120px 32px;
+  background:
+    radial-gradient(ellipse at center, rgba(168, 125, 79, 0.08) 0%, transparent 70%),
+    var(--bg);
+  position: relative;
+}
+
+.hero-tag {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 13px;
+  letter-spacing: 6px;
+  color: var(--text-3);
+  margin-bottom: 56px;
+  opacity: 0;
+  animation: fadeIn 2s ease 0.2s forwards;
+}
+
+.hero-name {
+  font-family: var(--display);
+  font-weight: 300;
+  font-size: clamp(48px, 7vw, 82px);
+  letter-spacing: 12px;
+  color: var(--text);
+  line-height: 1.1;
+  margin-right: -12px;
+  opacity: 0;
+  animation: fadeIn 2.4s ease 0.6s forwards;
+}
+
+.hero-rule {
+  width: 44px;
+  height: 0.5px;
+  background: var(--text-4);
+  margin: 64px auto;
+  opacity: 0;
+  animation: fadeIn 1.5s ease 1.4s forwards;
+}
+
+.hero-haiku {
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 19px;
+  line-height: 2.2;
+  color: var(--text-2);
+  letter-spacing: 0.5px;
+  opacity: 0;
+  animation: fadeIn 2s ease 1.8s forwards;
+  max-width: 520px;
+  padding: 0 20px;
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--text-4);
+  opacity: 0;
+  animation: fadeIn 1.5s ease 2.4s forwards, floatDown 3s ease-in-out 2.4s infinite;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+@keyframes floatDown {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(6px); }
+}
+
+/* ---------- ŒUVRES ---------- */
+.oeuvres {
+  padding: 140px 48px;
+}
+
+.oeuvres-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.piece {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  cursor: pointer;
+}
+
+.piece-image {
+  aspect-ratio: 3/4;
+  background: var(--bg-3);
+  border: 0.5px solid var(--line);
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.piece:hover .piece-image {
+  transform: translateY(-4px);
+}
+
+.piece-image svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.35;
+  transition: opacity 0.6s ease;
+}
+
+.piece:hover .piece-image svg {
+  opacity: 0.55;
+}
+
+.piece-number {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: var(--text-4);
+  margin-top: 20px;
+}
+
+.piece-title {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 22px;
+  color: var(--text-2);
+  margin-top: 8px;
+  letter-spacing: 1px;
+}
+
+.piece-material {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--text-3);
+  margin-top: 4px;
+}
+
+.piece-status {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--text-4);
+  margin-top: 14px;
+}
+
+.piece-status.sold { color: var(--text-4); }
+.piece-status.available { color: var(--accent); opacity: 0.7; }
+
+/* ---------- ATELIER ---------- */
+.atelier {
+  padding: 140px 48px;
+  background: var(--bg-2);
+  border-top: 0.5px solid var(--line);
+}
+
+.atelier-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 5fr 6fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.atelier-image {
+  aspect-ratio: 4/5;
+  background: var(--bg-3);
+  border: 0.5px solid var(--line);
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+}
+
+.atelier-image svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.3;
+}
+
+.atelier-content .section-eyebrow {
+  margin-bottom: 40px;
+}
+
+.atelier-content h2 {
+  font-family: var(--display);
+  font-weight: 300;
+  font-size: 36px;
+  letter-spacing: 2px;
+  color: var(--text);
+  line-height: 1.25;
+  margin-bottom: 40px;
+}
+
+.atelier-content p {
+  font-family: var(--display);
+  font-size: 20px;
+  line-height: 2;
+  color: var(--text-2);
+  margin-bottom: 28px;
+}
+
+.atelier-content p.italic {
+  font-style: italic;
+  color: var(--text-3);
+}
+
+/* ---------- SIGNATURE ---------- */
+.signature-section {
+  padding: 140px 32px;
+  text-align: center;
+  border-top: 0.5px solid var(--line);
+  background: var(--bg);
+}
+
+.signature-monogram {
+  width: 110px;
+  height: 110px;
+  margin: 0 auto 44px;
+  border: 0.5px solid var(--text-4);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--display);
+  font-weight: 300;
+  font-size: 54px;
+  color: var(--text-2);
+  line-height: 1;
+  padding-bottom: 6px;
+}
+
+.signature-text {
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 1.9;
+  color: var(--text-2);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* ---------- SUR MESURE (page dédiée) ---------- */
+.sur-mesure-page {
+  padding: 180px 32px 140px;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.sur-mesure-inner {
+  max-width: 620px;
+  width: 100%;
+  text-align: center;
+}
+
+.sur-mesure-eyebrow {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 12px;
+  letter-spacing: 4px;
+  color: var(--text-3);
+  display: block;
+  margin-bottom: 32px;
+}
+
+.sur-mesure-title {
+  font-family: var(--display);
+  font-weight: 300;
+  font-size: 54px;
+  letter-spacing: 6px;
+  color: var(--text);
+  margin-bottom: 68px;
+}
+
+.sur-mesure-rule {
+  width: 44px;
+  height: 0.5px;
+  background: var(--text-4);
+  margin: 0 auto 68px;
+}
+
+.sur-mesure-text p {
+  font-family: var(--display);
+  font-size: 19px;
+  line-height: 2.1;
+  color: var(--text-2);
+  margin-bottom: 32px;
+  text-align: left;
+}
+
+.sur-mesure-text p:last-of-type {
+  margin-bottom: 72px;
+}
+
+.sur-mesure-cta {
+  display: inline-block;
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 16px;
+  letter-spacing: 2.5px;
+  color: var(--text);
+  text-decoration: none;
+  padding: 18px 42px;
+  border: 0.5px solid var(--text-4);
+  border-radius: 2px;
+  transition: border-color 0.5s ease, color 0.5s ease, background 0.5s ease;
+}
+
+.sur-mesure-cta:hover {
+  border-color: var(--text-2);
+  color: var(--text);
+  background: rgba(168, 125, 79, 0.04);
+}
+
+/* ---------- FOOTER ---------- */
+footer {
+  padding: 60px 48px 48px;
+  border-top: 0.5px solid var(--line);
+  background: var(--bg-2);
+}
+
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.footer-inner .left,
+.footer-inner .right {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 12px;
+  letter-spacing: 2.5px;
+  color: var(--text-4);
+}
+
+.footer-inner .center {
+  font-family: var(--display);
+  font-size: 15px;
+  letter-spacing: 2px;
+  color: var(--text-2);
+}
+
+.footer-inner .center a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 0.5px solid var(--text-4);
+  padding-bottom: 3px;
+  transition: border-color 0.4s;
+}
+
+.footer-inner .center a:hover {
+  border-color: var(--text-2);
+}
+
+/* ---------- Reveals on scroll ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 1.2s ease, transform 1.2s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.reveal.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 860px) {
+  nav { padding: 18px 24px; }
+  .menu { gap: 20px; }
+  .menu a { font-size: 13px; }
+  .hero { padding: 100px 24px; }
+  .hero-name { letter-spacing: 8px; }
+  .oeuvres, .atelier, .signature-section { padding: 110px 24px; }
+  .oeuvres-grid { grid-template-columns: 1fr; gap: 48px; max-width: 420px; }
+  .atelier-inner { grid-template-columns: 1fr; gap: 48px; }
+  .footer-inner { flex-direction: column; text-align: center; }
+  .sur-mesure-page { padding: 150px 24px 110px; }
+  .sur-mesure-title { font-size: 44px; letter-spacing: 4px; }
+}
+
+@media (max-width: 560px) {
+  nav { padding: 14px 20px; }
+  .monogram { font-size: 22px; }
+  .menu { gap: 14px; }
+  .menu a { font-size: 11px; }
+
+  .hero { padding: 90px 22px 70px; }
+  .hero-tag { font-size: 11px; letter-spacing: 3px; margin-bottom: 42px; }
+  .hero-name { font-size: 44px; letter-spacing: 4px; margin-right: -4px; }
+  .hero-rule { margin: 44px auto; }
+  .hero-haiku { font-size: 17px; }
+
+  .section-title { font-size: 28px; }
+  .section-header { margin-bottom: 60px; }
+
+  .oeuvres, .atelier, .signature-section { padding: 80px 22px; }
+
+  .atelier-content p { font-size: 18px; line-height: 1.9; }
+  .atelier-content .section-eyebrow { margin-bottom: 30px; }
+
+  .piece-title { font-size: 20px; }
+
+  .signature-monogram { width: 90px; height: 90px; font-size: 44px; }
+  .signature-text { font-size: 16px; }
+
+  footer { padding: 44px 22px 32px; }
+  .footer-inner .center { font-size: 14px; }
+
+  .sur-mesure-page { padding: 130px 22px 90px; }
+  .sur-mesure-title { font-size: 36px; letter-spacing: 3px; margin-bottom: 52px; }
+  .sur-mesure-rule { margin-bottom: 52px; }
+  .sur-mesure-text p { font-size: 17px; line-height: 1.9; }
+  .sur-mesure-cta { font-size: 14px; padding: 16px 32px; letter-spacing: 2px; }
+}
+
+@media (max-width: 380px) {
+  .hero-name { font-size: 38px; letter-spacing: 3px; }
+  .menu { gap: 10px; }
+  .menu a { font-size: 10px; letter-spacing: 0.3px; }
+}
